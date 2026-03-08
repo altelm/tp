@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * Implementation
     * Documentation
 
-### Rachel
+### Rachel Ng
 
 <img src="images/e1356231.png" width="200px">
 
