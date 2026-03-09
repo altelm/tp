@@ -349,6 +349,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
+**Use case: Edit Member**
+
+**MSS**
+
+1. Receptionist requests to edit a specific member
+2. FitDesk displays the current stored information of the selected member
+3. Receptionist modifies one or more fields of the member’s information
+4. Receptionist saves the changes
+5. FitDesk updates the member’s information and confirms the update
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Invalid input provided
+    * 3a1. FitDesk detects invalid input.
+      3a2. FitDesk displays an error message and requests correct input.
+      3a3. Receptionist corrects the input.
+
+      Use case resumes at step 4.
+
+
+* 3b. Receptionist cancels the edit operation
+    * 3b1. Receptionist cancels the edit request.
+    * 3b2. FitDesk discards the changes and returns to the main member list.
+  
+      Use case ends.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
