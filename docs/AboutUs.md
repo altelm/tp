@@ -13,6 +13,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Raghad Altelmessani
 
+<img src="images/altelm.png" width="200px">
+
 [[github](https://github.com/altelm)]
 
 * Role: team member
@@ -32,7 +34,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/phfabs.png" width="200px">
 
-[github]: https://github.com/phfabs
 [[github](https://github.com/phfabs)]
 [[portfolio](team/phfabs)]
 
