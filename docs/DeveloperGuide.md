@@ -298,15 +298,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FitDesk CLI` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FitDesk` and the **Actor** is the `Receptionist`, unless specified otherwise)
 
-**Use case: Delete a member**
+**Use case: Delete Member**
 
 **MSS**
 
-1.  User requests to list members
+1.  Receptionist requests to list members
 2.  FitDesk shows a list of members
-3.  User requests to delete a specific member in the list
+3.  Receptionist requests to delete a specific member in the list
 4.  FitDesk deletes the person
 
     Use case ends.
@@ -317,11 +317,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 * 3a. The given index is invalid.
-
     * 3a1. FitDesk shows an error message.
-
+  
       Use case resumes at step 2.
+
+**Use case: Find Member**
+
+**MSS**
+
+1.  Receptionist requests to find members by keyword(s)
+2.  FitDesk searches for members whose names contain any of the given keywords
+3.  FitDesk shows a list of matching members
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Receptionist provides no keywords.
+    * 1a1. FitDesk shows an error message.
+  
+      Use case ends.
+
+
+* 3a. No members match the given keyword(s).
+    * 3a1. FitDesk shows an empty list.
+  
+      Use case ends.
 
 *{More to be added}*
 
