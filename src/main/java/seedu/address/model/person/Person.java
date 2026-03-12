@@ -17,6 +17,7 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final MemberId id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -26,14 +27,19 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final MembershipType membershipType;
+    private final MembershipJoinDate joinDate;
+    private final MembershipExpiryDate expiryDate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Gender gender, DateOfBirth dateOfBirth, MemberStatus memberStatus,
-                  Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(MemberId id, Name name, Phone phone, Email email,Gender gender, DateOfBirth dateOfBirth, 
+                  MemberStatus memberStatus, Address address,
+                  MembershipType type, MembershipJoinDate joinDate, Set<Tag> tags) {
+        requireAllNonNull(id, name, phone, email, address, type, joinDate, tags);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,7 +47,14 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
         this.memberStatus = memberStatus;
         this.address = address;
+        this.membershipType = type;
+        this.joinDate = joinDate;
+        this.expiryDate = new MembershipExpiryDate(joinDate.getDate(), membershipType);
         this.tags.addAll(tags);
+    }
+
+    public MemberId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -58,6 +71,15 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public MembershipType getMembershipType() {
+        return membershipType;
+    }
+    public MembershipJoinDate getJoinDate() {
+        return joinDate;
+    }
+    public MembershipExpiryDate getExpiryDate() {
+        return expiryDate;
     }
 
     public Gender getGender() {
@@ -116,18 +138,23 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && memberStatus.equals(otherPerson.memberStatus)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && membershipType.equals(otherPerson.membershipType)
+                && joinDate.equals(otherPerson.joinDate)
+                && expiryDate.equals(otherPerson.expiryDate)
+                && tags.equals(otherPerson.tags)
+                && id.equals(otherPerson.id);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, gender, dateOfBirth, memberStatus, address, tags);
+        return Objects.hash(id, name, phone, email, gender, dateOfBirth, memberStatus, address, membershipType, joinDate, expiryDate, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("member id", id.toString())
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -135,6 +162,9 @@ public class Person {
                 .add("date of birth", dateOfBirth)
                 .add("member status", memberStatus)
                 .add("address", address)
+                .add("type", membershipType)
+                .add("join date", joinDate.toString())
+                .add("expiry date", expiryDate.toString())
                 .add("tags", tags)
                 .toString();
     }

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -15,11 +16,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.GenerateMemberIds;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.MemberStatus;
+import seedu.address.model.person.MemberId;
+import seedu.address.model.person.MembershipJoinDate;
+import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -38,11 +43,16 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_DATEOFBIRTH,
-                        PREFIX_MEMBERSTATUS, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                        PREFIX_MEMBERSTATUS, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_MEMBERSHIP_TYPE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_GENDER, PREFIX_DATEOFBIRTH, PREFIX_MEMBERSTATUS)
+                PREFIX_GENDER, PREFIX_DATEOFBIRTH, PREFIX_MEMBERSTATUS, PREFIX_MEMBERSHIP_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_MEMBERSHIP_TYPE, PREFIX_TAG);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_MEMBERSHIP_TYPE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -55,9 +65,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         MemberStatus memberStatus = ParserUtil.parseMemberStatus(argMultimap.getValue(PREFIX_MEMBERSTATUS).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        MembershipType membershipType = ParserUtil.parseType(argMultimap.getValue(PREFIX_MEMBERSHIP_TYPE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        MemberId memberId = GenerateMemberIds.generateNextId();
+        MembershipJoinDate joinDate = new MembershipJoinDate();
+        Person person = new Person(memberId, name, phone, gender, dateOfBirth, memberStatus, email, address, membershipType, joinDate, tagList);
 
-        Person person = new Person(name, phone, gender, dateOfBirth, memberStatus, email, address, tagList);
 
         return new AddCommand(person);
     }

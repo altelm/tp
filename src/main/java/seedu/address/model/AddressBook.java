@@ -36,6 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+        initializeMemberIds();
     }
 
     //// list overwrite operations
@@ -126,5 +127,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    private void initializeMemberIds() {
+        int maxId = persons.asUnmodifiableObservableList().stream()
+                .mapToInt(p -> p.getId().getId())
+                .max()
+                .orElse(0);
+        GenerateMemberIds.initialize(maxId);
     }
 }

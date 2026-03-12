@@ -27,6 +27,10 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+      <Label fx:id="memberId" styleClass="cell_small_label" />
+      <Label fx:id="type" styleClass="cell_small_label" />
+      <Label fx:id="joinDate" styleClass="cell_small_label" />
+      <Label fx:id="expiryDate" styleClass="cell_small_label" />
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />

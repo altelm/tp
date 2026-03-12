@@ -10,11 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.GenerateMemberIds;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.MemberStatus;
+import seedu.address.model.person.MemberId;
+import seedu.address.model.person.MembershipJoinDate;
+import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,6 +31,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    private final String id;
     private final String name;
     private final String phone;
     private final String gender;
@@ -34,17 +39,23 @@ class JsonAdaptedPerson {
     private final String memberStatus;
     private final String email;
     private final String address;
+    private final String type;
+    private final String joinDate;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("gender") String gender, @JsonProperty("dateOfBirth") String dateOfBirth,
-                             @JsonProperty("memberStatus") String memberStatus,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+
+    public JsonAdaptedPerson(@JsonProperty("member id") String id, @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone, @JsonProperty("gender") String gender, 
+            @JsonProperty("dateOfBirth") String dateOfBirth,
+            @JsonProperty("memberStatus") String memberStatus,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("type") String type,
+            @JsonProperty("join date") String joinDate, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.gender = gender;
@@ -52,6 +63,8 @@ class JsonAdaptedPerson {
         this.memberStatus = memberStatus;
         this.email = email;
         this.address = address;
+        this.type = type;
+        this.joinDate = joinDate;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,6 +74,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        id = source.getId().toString();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().gender;
@@ -68,6 +82,8 @@ class JsonAdaptedPerson {
         memberStatus = source.getMemberStatus().memberStatus;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        type = source.getMembershipType().toString();
+        joinDate = source.getJoinDate().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -141,9 +157,32 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (type == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, MembershipType.class.getSimpleName()));
+        }
+        if (!MembershipType.isValidType(type)) {
+            throw new IllegalValueException(MembershipType.MESSAGE_CONSTRAINTS);
+        }
+        final MembershipType modelType = new MembershipType(type);
+
+        final MembershipJoinDate modelJoinDate;
+        if (joinDate != null) {
+            modelJoinDate = new MembershipJoinDate(joinDate);
+        } else {
+            modelJoinDate = new MembershipJoinDate();
+        }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelGender, modelDateOfBirth, modelMemberStatus, modelEmail,
-                modelAddress, modelTags);
+      
+        final MemberId modelId;
+        if (id != null) {
+            int idNumber = Integer.parseInt(id.substring(1));
+            modelId = new MemberId(idNumber);
+        } else {
+            modelId = GenerateMemberIds.generateNextId();
+        }
+        return new Person(modelId, modelName, modelPhone, modelGender, modelDateOfBirth, modelMemberStatus,
+                          modelEmail, modelAddress, modelType, modelJoinDate, modelTags);
     }
 
 }
