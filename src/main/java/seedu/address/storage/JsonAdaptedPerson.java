@@ -140,7 +140,8 @@ class JsonAdaptedPerson {
         final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
         //        if(memberStatus == null) {
-        //            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MemberStatus.class.getSimpleName()));
+        //            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+        //                    MemberStatus.class.getSimpleName()));
         //        }
         //        if (!MemberStatus.isValidMemberStatus(memberStatus)) {
         //            throw new IllegalValueException(MemberStatus.MESSAGE_CONSTRAINTS);
