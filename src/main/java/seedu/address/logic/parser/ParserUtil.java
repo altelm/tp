@@ -1,9 +1,8 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Collection;
 import java.util.HashSet;
+import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -13,7 +12,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
-//import seedu.address.model.person.MemberStatus;
+import seedu.address.model.person.MembershipJoinDate;
 import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -126,6 +125,21 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String joinDate} into a {@code MembershipJoinDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code joinDate} is invalid.
+     */
+    public static MembershipJoinDate parseJoinDate(String joinDate) throws ParseException {
+        requireNonNull(joinDate);
+        String trimmedJoinDate = joinDate.trim();
+        if (!MembershipJoinDate.isValidJoinDate(trimmedJoinDate)) {
+            throw new ParseException(MembershipJoinDate.MESSAGE_CONSTRAINTS);
+        }
+        return new MembershipJoinDate(trimmedJoinDate);
     }
 
     /**
