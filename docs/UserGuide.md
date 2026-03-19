@@ -127,7 +127,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findresult.png)
 
 ### Filtering members by fields: `filter`
 
@@ -137,7 +137,7 @@ Format: `filter [s/STATUS] [g/GENDER] [m/MEMBERSHIP_TYPE] [age>/AGE] [age</AGE] 
 
 Examples:
 * `filter s/valid` returns list of members with valid memberships
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'filter s/valid'](images/filter_result.png)
 
 ### Deleting a person : `delete`
 
