@@ -8,15 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -35,7 +31,6 @@ import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -55,7 +50,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DATEOFBIRTH + "DATEOFBIRTH] "
             + "[" + PREFIX_MEMBERSTATUS + "MEMBERSTATUS] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -117,10 +111,9 @@ public class EditCommand extends Command {
                                                                         .orElse(personToEdit.getEmergencyContact());
         MembershipType updatedType = editPersonDescriptor.getType().orElse(personToEdit.getMembershipType());
         MembershipJoinDate updatedJoinDate = editPersonDescriptor.getJoinDate().orElse(personToEdit.getJoinDate());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(memberId, updatedName, updatedPhone, updatedGender, updatedDateOfBirth, updatedEmail,
-                updatedEmergencyContact, updatedType, updatedJoinDate, updatedTags);
+                updatedEmergencyContact, updatedType, updatedJoinDate);
     }
 
     @Override
@@ -161,7 +154,6 @@ public class EditCommand extends Command {
         private EmergencyContact emergencyContact;
         private MembershipType type;
         private MembershipJoinDate joinDate;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -179,7 +171,6 @@ public class EditCommand extends Command {
             setEmergencyContact(toCopy.emergencyContact);
             setMembershipType(toCopy.type);
             setJoinDate(toCopy.joinDate);
-            setTags(toCopy.tags);
         }
 
         /**
@@ -187,7 +178,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate, tags);
+                    name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate);
         }
 
         public void setName(Name name) {
@@ -262,23 +253,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(joinDate);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -298,8 +272,7 @@ public class EditCommand extends Command {
                     && Objects.equals(memberStatus, otherEditPersonDescriptor.memberStatus)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact)
-                    && Objects.equals(type, otherEditPersonDescriptor.type)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(type, otherEditPersonDescriptor.type);
         }
 
         @Override
@@ -313,7 +286,6 @@ public class EditCommand extends Command {
                     .add("memberStatus", memberStatus)
                     .add("email", email)
                     .add("emergency contact", emergencyContact)
-                    .add("tags", tags)
                     .toString();
         }
     }

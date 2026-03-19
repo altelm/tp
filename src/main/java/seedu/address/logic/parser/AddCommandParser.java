@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.util.stream.Stream;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.AddCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -9,12 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
-import java.util.stream.Stream;
-
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.GenerateMemberIds;
 import seedu.address.model.person.DateOfBirth;
@@ -27,7 +24,6 @@ import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_DATEOFBIRTH,
-                        PREFIX_EMAIL, PREFIX_EMERGENCY_CONTACT, PREFIX_MEMBERSHIP_TYPE, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_MEMBERSHIP_TYPE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_DATEOFBIRTH,
                 PREFIX_EMAIL, PREFIX_EMERGENCY_CONTACT, PREFIX_MEMBERSHIP_TYPE)
@@ -59,11 +55,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         EmergencyContact emergencyContact = ParserUtil.parseEmergencyContact(argMultimap
                                                                        .getValue(PREFIX_EMERGENCY_CONTACT).get());
         MembershipType membershipType = ParserUtil.parseType(argMultimap.getValue(PREFIX_MEMBERSHIP_TYPE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         MemberId memberId = GenerateMemberIds.generateNextId();
         MembershipJoinDate joinDate = new MembershipJoinDate();
         Person person = new Person(memberId, name, phone, gender, dateOfBirth, email, emergencyContact,
-                membershipType, joinDate, tagList);
+                membershipType, joinDate);
 
         return new AddCommand(person);
     }

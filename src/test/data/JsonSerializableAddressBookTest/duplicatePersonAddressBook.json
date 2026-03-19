@@ -7,8 +7,7 @@
     "memberStatus": "valid",
     "email": "alice@example.com",
     "emergency contact": "81236811",
-    "type" : "Annual",
-    "tags": [ "friends" ]
+    "type" : "Annual"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

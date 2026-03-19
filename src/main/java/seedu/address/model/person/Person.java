@@ -2,13 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -30,15 +26,14 @@ public class Person {
     private final MembershipType membershipType;
     private final MembershipJoinDate joinDate;
     private final MembershipExpiryDate expiryDate;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(MemberId id, Name name, Phone phone, Gender gender,
                   DateOfBirth dateOfBirth, Email email, EmergencyContact emergencyContact,
-                  MembershipType type, MembershipJoinDate joinDate, Set<Tag> tags) {
-        requireAllNonNull(id, name, phone, email, emergencyContact, type, joinDate, tags);
+                  MembershipType type, MembershipJoinDate joinDate) {
+        requireAllNonNull(id, name, phone, email, emergencyContact, type, joinDate);
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -50,7 +45,6 @@ public class Person {
         this.joinDate = joinDate;
         this.expiryDate = new MembershipExpiryDate(joinDate.getDate(), membershipType);
         this.memberStatus = new MemberStatus(this.expiryDate.getExpiryDate());
-        this.tags.addAll(tags);
     }
 
     public MemberId getId() {
@@ -95,14 +89,6 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -141,7 +127,6 @@ public class Person {
                 && membershipType.equals(otherPerson.membershipType)
                 //&& joinDate.equals(otherPerson.joinDate)
                 //&& expiryDate.equals(otherPerson.expiryDate)
-                && tags.equals(otherPerson.tags)
                 && id.equals(otherPerson.id);
     }
 
@@ -149,7 +134,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(id, name, phone, email, gender, dateOfBirth,
-                memberStatus, emergencyContact, membershipType, joinDate, expiryDate, tags);
+                memberStatus, emergencyContact, membershipType, joinDate, expiryDate);
     }
 
     @Override
@@ -166,7 +151,6 @@ public class Person {
                 .add("emergency contact", emergencyContact)
                 //.add("join date", joinDate.toString())
                 //.add("expiry date", expiryDate.toString())
-                .add("tags", tags)
                 .toString();
     }
 

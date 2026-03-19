@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
@@ -13,8 +10,6 @@ import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -40,7 +35,6 @@ public class PersonBuilder {
     private EmergencyContact emergencyContact;
     private MembershipType type;
     private MembershipJoinDate joinDate;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -55,7 +49,6 @@ public class PersonBuilder {
         emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT);
         type = new MembershipType(DEFAULT_TYPE);
         joinDate = new MembershipJoinDate(DEFAULT_JOIN_DATE);
-        tags = new HashSet<>();
     }
 
     /**
@@ -71,7 +64,6 @@ public class PersonBuilder {
         emergencyContact = personToCopy.getEmergencyContact();
         type = personToCopy.getMembershipType();
         joinDate = personToCopy.getJoinDate();
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -79,14 +71,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -144,7 +128,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(id, name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate, tags);
+        return new Person(id, name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate);
     }
 
 }

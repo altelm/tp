@@ -1,20 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import seedu.address.model.GenerateMemberIds;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -33,19 +29,14 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_DATEOFBIRTH + "DATEOFBIRTH "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_EMERGENCY_CONTACT + "EMERGENCYCONTACT "
-            + PREFIX_MEMBERSHIP_TYPE + "MEMBERSHIPTYPE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_ADDRESS + "ADDRESS "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
             + PREFIX_DATEOFBIRTH + "02-02-2002 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_EMERGENCY_CONTACT + "91234567 "
-            + PREFIX_MEMBERSHIP_TYPE + "monthly "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ADDRESS + "93110225";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

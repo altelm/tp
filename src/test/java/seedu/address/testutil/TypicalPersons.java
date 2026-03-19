@@ -12,8 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 
@@ -37,7 +35,7 @@ public class TypicalPersons {
             .withGender("F")
             .withDateOfBirth("01-01-1990")
             .withType("Annual")
-            .withTags("friends").build();
+            .build();
     public static final Person BENSON = new PersonBuilder()
             .withName("Benson Meier")
             .withEmergencyContact("83110225")
@@ -46,7 +44,7 @@ public class TypicalPersons {
             .withGender("M")
             .withDateOfBirth("01-01-1990")
             .withType("Annual")
-            .withTags("owesMoney", "friends").build();
+            .build();
     public static final Person CARL = new PersonBuilder()
             .withName("Carl Kurz")
             .withPhone("95352563")
@@ -63,7 +61,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withEmergencyContact("88431033")
             .withType("Annual")
-            .withTags("friends").build();
+            .build();
     public static final Person ELLE = new PersonBuilder()
             .withName("Elle Meyer").withPhone("94822243")
             .withGender("F").withDateOfBirth("01-01-1990")
@@ -103,13 +101,12 @@ public class TypicalPersons {
             .withGender(VALID_GENDER_AMY).withDateOfBirth(VALID_DATEOFBIRTH_AMY)
             .withType(VALID_TYPE_AMY)
             .withEmail(VALID_EMAIL_AMY)
-            .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withGender(VALID_GENDER_BOB).withDateOfBirth(VALID_DATEOFBIRTH_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withType(VALID_TYPE_BOB)
-            .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+            .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
