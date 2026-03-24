@@ -89,6 +89,13 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER d/DATE_OF_BIRTH m/MEMBERSHIP_TYPE e/
 
 Examples:
 * `add n/John Doe p/98765432 g/M d/19-01-2004 m/annual e/johnd@example.com a/98723347`
+
+![add new member](images/add_member.png)
+
+A new member `John Doe` is added to the member list
+
+![added member](images/added.png)
+
 * `add n/Betsy Crowe m/monthly a/93349011 e/betsycrowe@example.com g/F d/28-01-2002 p/1234567`
 
 ### Listing all persons : `list`
@@ -96,6 +103,9 @@ Examples:
 Shows a list of all members in the list.
 
 Format: `list`
+
+Example:
+![list](images/list.png)
 
 ### Editing a person : `edit`
 
@@ -109,7 +119,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [d/DATE_OF_BIRTH] [m/ME
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+  ![result for 'edit 1 p/91234567 e/johndoe@example.com'](images/Edit_Example_1.png)
 *  `edit 2 n/Betsy Crower m/annual` Edits the name and membership type of the 2nd member to be `Betsy Crower`and `annual` respectively.
+  ![result for 'edit 2 n/Betsy Crower m/annual'](images/Edit_Example_2.png)
 
 ### Locating members by keyword: `find`
 
@@ -152,7 +164,15 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+  1. `list`
+  
+     ![list](images/list_2.png)
+  
+  2. `delete 2`
+  
+  ![deleted member](images/delete_2.png)
+  
+* `find Alex` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
