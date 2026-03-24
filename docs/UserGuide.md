@@ -89,6 +89,13 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER d/DATE_OF_BIRTH m/MEMBERSHIP_TYPE e/
 
 Examples:
 * `add n/John Doe p/98765432 g/M d/19-01-2004 m/annual e/johnd@example.com a/98723347`
+
+![add new member](images/add_member.png)
+
+A new member `John Doe` is added to the member list
+
+![added member](images/added.png)
+
 * `add n/Betsy Crowe m/monthly a/93349011 e/betsycrowe@example.com g/F d/28-01-2002 p/1234567`
 
 ### Listing all persons : `list`
@@ -157,8 +164,11 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
   1. `list`
+  
      ![list](images/list_2.png)
+  
   2. `delete 2`
+  
   ![deleted member](images/delete_2.png)
   
 * `find Alex` followed by `delete 1` deletes the 1st person in the results of the `find` command.
