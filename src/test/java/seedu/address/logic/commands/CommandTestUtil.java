@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.RenewPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -80,6 +81,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final RenewCommand.RenewPersonDescriptor RENEW_DESC_AMY;
+    public static final RenewCommand.RenewPersonDescriptor RENEW_DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -92,6 +95,9 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
                 .withType(VALID_TYPE_BOB)
                 .build();
+        RENEW_DESC_AMY = new RenewPersonDescriptorBuilder().withType(VALID_TYPE_AMY).build();
+        RENEW_DESC_BOB = new RenewPersonDescriptorBuilder().withType(VALID_TYPE_BOB).build();
+
     }
 
     /**
