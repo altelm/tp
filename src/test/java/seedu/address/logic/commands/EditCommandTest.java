@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -168,8 +168,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Undo Edit").build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        assertThrows(CommandException.class, "Unable to undo edit: missing original data.",
-                () -> editCommand.undo(model));
+        assertThrows(CommandException.class,
+                "Unable to undo edit: missing original data.", () -> editCommand.undo(model));
     }
 
     @Test
@@ -182,8 +182,8 @@ public class EditCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         model.deletePerson(editedPerson);
 
-        assertThrows(CommandException.class, "Unable to undo edit: edited person not found.",
-                () -> editCommand.undo(model));
+        assertThrows(CommandException.class,
+                "Unable to undo edit: edited person not found.", () -> editCommand.undo(model));
     }
 
     @Test

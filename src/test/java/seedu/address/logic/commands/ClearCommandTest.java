@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,8 +51,8 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ClearCommand clearCommand = new ClearCommand();
 
-        assertThrows(CommandException.class, "Unable to undo clear: no previous state stored.",
-                () -> clearCommand.undo(model));
+        assertThrows(CommandException.class,
+                "Unable to undo clear: no previous state stored.", () -> clearCommand.undo(model));
     }
 
 }
