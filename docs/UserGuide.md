@@ -257,9 +257,9 @@ Allows you to quickly re-use previously entered commands using the arrow keys in
 * The cursor will be placed at the end of the text after navigating.
 * Pressing `Down` past the most recent command clears the command box.
 
-![navigating to previous command](images/command_history_up.png)
+![navigating to previous command](images/command_history_down.png)
 
-![navigating to next command](images/command_history_down.png)
+![navigating to next command](images/command_history_up.png)
 
 ### Exiting the program : `exit`
 
