@@ -32,6 +32,7 @@
                 <Label fx:id="memberId" styleClass="details_small_label" />
                 <Label fx:id="joinDate" styleClass="details_small_label" />
                 <Label fx:id="expiryDate" styleClass="details_small_label" />
+                <Label fx:id="remarks" styleClass="details_small_label" />
             </VBox>
 
             <VBox alignment="CENTER_LEFT">

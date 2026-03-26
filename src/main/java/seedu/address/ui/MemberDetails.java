@@ -47,6 +47,8 @@ public class MemberDetails extends UiPart<Region> {
     private Label joinDate;
     @FXML
     private Label expiryDate;
+    @FXML
+    private Label remarks;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,6 +71,7 @@ public class MemberDetails extends UiPart<Region> {
         emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
         email.setText(person.getEmail().value);
         type.setText(person.getMembershipType().toString());
+        remarks.setText("Remarks: " + person.getRemark().value);
         if (person.getMembershipType().value.equalsIgnoreCase("monthly")) {
             type.getStyleClass().add("type-month");
         } else {
