@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.RenewPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -31,8 +32,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "91111111";
+    public static final String VALID_PHONE_BOB = "82222222";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_DATEOFBIRTH_AMY = "02-02-2002";
@@ -58,8 +59,10 @@ public class CommandTestUtil {
     public static final String MEMBERSTATUS_DESC_BOB = " " + PREFIX_MEMBERSTATUS + VALID_MEMBERSTATUS_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String EMERGENCY_CONTACT_DESC_AMY = " " + PREFIX_ADDRESS + VALID_EMERGENCY_CONTACT_AMY;
-    public static final String EMERGENCY_CONTACT_DESC_BOB = " " + PREFIX_ADDRESS + VALID_EMERGENCY_CONTACT_BOB;
+    public static final String EMERGENCY_CONTACT_DESC_AMY = " " + PREFIX_EMERGENCY_CONTACT
+            + VALID_EMERGENCY_CONTACT_AMY;
+    public static final String EMERGENCY_CONTACT_DESC_BOB = " " + PREFIX_EMERGENCY_CONTACT
+            + VALID_EMERGENCY_CONTACT_BOB;
     public static final String TYPE_DESC_AMY = " " + PREFIX_MEMBERSHIP_TYPE + VALID_TYPE_AMY;
     public static final String TYPE_DESC_BOB = " " + PREFIX_MEMBERSHIP_TYPE + VALID_TYPE_BOB;
 
@@ -70,7 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_MEMBERSTATUS_DESC = " " + PREFIX_MEMBERSTATUS + "on"; // only 'valid'/'invalid'
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     // empty string not allowed for emergency contact
-    public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_ADDRESS;
+    public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT;
     public static final String INVALID_TYPE_DESC = " " + PREFIX_MEMBERSHIP_TYPE + "senior"; // missing '@' symbol
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -78,6 +81,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final RenewCommand.RenewPersonDescriptor RENEW_DESC_AMY;
+    public static final RenewCommand.RenewPersonDescriptor RENEW_DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -90,6 +95,9 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
                 .withType(VALID_TYPE_BOB)
                 .build();
+        RENEW_DESC_AMY = new RenewPersonDescriptorBuilder().withType(VALID_TYPE_AMY).build();
+        RENEW_DESC_BOB = new RenewPersonDescriptorBuilder().withType(VALID_TYPE_BOB).build();
+
     }
 
     /**

@@ -38,7 +38,6 @@ public class PersonBuilder {
     private MembershipType type;
     private MembershipJoinDate joinDate;
     private MembershipExpiryDate expiryDate;
-
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -52,6 +51,7 @@ public class PersonBuilder {
         emergencyContact = new EmergencyContact(DEFAULT_EMERGENCY_CONTACT);
         type = new MembershipType(DEFAULT_TYPE);
         joinDate = new MembershipJoinDate(DEFAULT_JOIN_DATE);
+        expiryDate = new MembershipExpiryDate(DEFAULT_EXPIRY_DATE);
     }
 
     /**
@@ -67,6 +67,7 @@ public class PersonBuilder {
         emergencyContact = personToCopy.getEmergencyContact();
         type = personToCopy.getMembershipType();
         joinDate = personToCopy.getJoinDate();
+        expiryDate = personToCopy.getExpiryDate();
     }
 
     /**
@@ -138,7 +139,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(id, name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate);
+        return new Person(id, name, phone, gender, dateOfBirth, email, emergencyContact, type, joinDate, expiryDate);
     }
 
 }
