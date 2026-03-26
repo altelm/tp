@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.lang.reflect.Field;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -103,6 +105,21 @@ public class RemarkCommandTest {
 
         assertThrows(CommandException.class,
                 "Unable to undo remark: edited person not found.", () -> remarkCommand.undo(model));
+    }
+
+    @Test
+    public void undo_missingEditedPersonReference_throwsCommandException() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(REMARK_STUB));
+
+        remarkCommand.execute(model);
+
+        Field editedPersonField = RemarkCommand.class.getDeclaredField("editedPerson");
+        editedPersonField.setAccessible(true);
+        editedPersonField.set(remarkCommand, null);
+
+        assertThrows(CommandException.class,
+                "Unable to undo remark: missing original data.", () -> remarkCommand.undo(model));
     }
 
     @Test

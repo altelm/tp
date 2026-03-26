@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.lang.reflect.Field;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -144,6 +146,22 @@ public class RenewCommandTest {
 
         assertThrows(CommandException.class,
                 "Unable to undo renew: renewed member not found.", () -> renewCommand.undo(model));
+    }
+
+    @Test
+    public void undo_missingEditedPersonReference_throwsCommandException() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        RenewPersonDescriptor descriptor = new RenewPersonDescriptorBuilder().withType(VALID_TYPE_BOB).build();
+        RenewCommand renewCommand = new RenewCommand(INDEX_FIRST_PERSON, descriptor);
+
+        renewCommand.execute(model);
+
+        Field editedPersonField = RenewCommand.class.getDeclaredField("renewedPerson");
+        editedPersonField.setAccessible(true);
+        editedPersonField.set(renewCommand, null);
+
+        assertThrows(CommandException.class,
+                "Unable to undo renew: missing original data.", () -> renewCommand.undo(model));
     }
 
     @Test
