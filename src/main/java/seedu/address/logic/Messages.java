@@ -55,6 +55,8 @@ public class Messages {
                 .append(person.getExpiryDate())
                 .append("; Status: ")
                 .append(person.getMemberStatus());
+                .append("; Remarks: ")
+                .append(person.getRemark());
         return builder.toString();
     }
 
