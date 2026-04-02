@@ -92,6 +92,14 @@ public class PersonContainsKeywordsPredicateTest {
         // Multi-word query not present as literal substring
         predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Amy Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").build()));
+
+        // Empty remark
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("morning"));
+        assertFalse(predicate.test(new PersonBuilder().withRemark(" ").build()));
+
+        // Non-matching remark
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("morning"));
+        assertFalse(predicate.test(new PersonBuilder().withRemark("Likes swimming").build()));
     }
 
     @Test
