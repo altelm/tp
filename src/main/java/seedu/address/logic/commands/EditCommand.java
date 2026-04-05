@@ -31,6 +31,7 @@ import seedu.address.model.person.MembershipType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
@@ -184,9 +185,10 @@ public class EditCommand extends Command {
         MembershipType updatedType = editPersonDescriptor.getType().orElse(personToEdit.getMembershipType());
         MembershipJoinDate joinDate = personToEdit.getJoinDate();
         MembershipExpiryDate expiryDate = personToEdit.getExpiryDate();
+        Remark remark = personToEdit.getRemark();
 
         return new Person(memberId, updatedName, updatedPhone, updatedGender, updatedDateOfBirth, updatedEmail,
-                updatedEmergencyContact, updatedType, joinDate, expiryDate);
+                updatedEmergencyContact, updatedType, joinDate, expiryDate, remark);
     }
 
     @Override
