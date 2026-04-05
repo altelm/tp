@@ -6,40 +6,85 @@
 
 # FitDesk User Guide
 
+## App Overview
 FitDesk is a **desktop app for front-desk receptionists** at small-to-medium private fitness gyms managing member registrations and daily check-ins. Tailored for **fast, keyboard-centric workflows**, FitDesk empowers receptionists to work more efficiently, reducing wait times and increasing productivity.
 
+### Supported Operating Systems
+1. macOS
+2. Windows
+3. Linux
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+### Setup Instructions
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. **Ensure you have Java `17` or above** installed on your computer.<br>
+2. **Platform-specific installation guides:**
+   - **Mac:** [Installation guide](https://se-education.org/guides/tutorials/javaInstallationMac.html)
+   - **Windows:** [Installation guide](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
+   - **Linux:** [Installation guide](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. **Download the latest `.jar` file** from [here](https://github.com/AY2526S2-CS2103T-W08-3/tp/releases).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. **Set up your home folder:**
+
+   Copy the `.jar` file to the folder you want to use as FitDesk's _home folder_.
+
+1. **Run the application:**
+   1. Open a **command terminal**:
+      - **Windows**: Press `Windows key + R`, type `cmd`, and press Enter
+      - **Mac/Linux**: Open the **Terminal** app
+   2. Navigate to the folder where the `.jar` file was saved
+      ```bash
+      cd path/to/your/folder
+   3. Run the application using:
+      ```bash
+      java -jar fitdesk.jar
+   4. The application should launch shortly after.
+
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. Use the `Up` and `Down` arrow keys (when the command box is focused) to cycle through previously entered commands.<br>
-   Some example commands you can try:
+--------------------------------------------------------------------------------------------------------------------
 
-   * `list` : Lists all contacts.
+### Using the Application
 
-   * `add n/John Doe p/98765432 g/M d/19-01-2004 m/annual e/johnd@example.com ec/98723347` : Adds a member named `John Doe` to the member list.
+1. Type a command into the **command box**.
+2. Press **Enter** to execute it. 
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    For example:
+    ```bash
+       help
+    ```
+   This opens the help window.
+   > 💡 **Tip:** 
+   > 
+    >- Use the **Up** and **Down** arrow keys to cycle through previously entered commands.
+---
+**Try these example commands:**
 
-   * `clear` : Deletes all contacts.
+   * List all members: `list`
 
-   * `exit` : Exits the app.
+   * Add a member named `John Doe` to FitDesk:
 
-1. Refer to the [Features](#features) below for details of each command.
+   ```bash
+   add n/John Doe p/98765432 g/M d/19-01-2004 m/annual e/johnd@example.com ec/98723347
+   ```
+
+   * Delete the 3rd member shown in the current list: `delete 3`
+
+   * Delete all members: `clear` 
+
+   * Exit the app: `exit`
+
+**Learn More**
+
+Refer to the [**Features**](#features) section below for full details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
