@@ -9,13 +9,12 @@ import java.time.LocalDate;
  */
 public class MemberStatus {
 
-    public final String memberStatus;
-
     public static final String MESSAGE_CONSTRAINTS =
             "Membership status should only be 'Valid' or 'Invalid'";
 
     public static final String VALIDATION_REGEX = "(?i)^(Valid|Invalid)$";
-
+    
+    public final String memberStatus;
     /**
      * Constructs a {@code MemberStatus}.
      *

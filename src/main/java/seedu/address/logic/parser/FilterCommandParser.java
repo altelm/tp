@@ -78,7 +78,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            if(!MemberStatus.isValidStatus(status)) {
+            if (!MemberStatus.isValidStatus(status)) {
                 throw new ParseException(MemberStatus.MESSAGE_CONSTRAINTS);
             }
             predicates.add(new StatusMatchesPredicate(status));
@@ -92,7 +92,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            if(!Gender.isValidGender(gender)) {
+            if (!Gender.isValidGender(gender)) {
                 throw new ParseException((Gender.MESSAGE_CONSTRAINTS));
             }
             predicates.add(new GenderMatchesPredicate(gender));
@@ -172,7 +172,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            if(!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
+            if (!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
                 throw new ParseException(MembershipExpiryDate.MESSAGE_CONSTRAINTS);
             }
 
@@ -185,7 +185,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            if(!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
+            if (!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
                 throw new ParseException(MembershipExpiryDate.MESSAGE_CONSTRAINTS);
             }
 
@@ -198,7 +198,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            if(!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
+            if (!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
                 throw new ParseException(MembershipExpiryDate.MESSAGE_CONSTRAINTS);
             }
             predicates.add(new ExpiryDateEqualsPredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
