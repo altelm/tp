@@ -182,7 +182,8 @@ Format: `renew INDEX [m/MEMBERSHIP_TYPE]`
 
 * Renews the member's membership at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
 * `MEMBERSHIP_TYPE` is an optional field.
-* Expiry date will be updated.
+* The new expiry extends from the **current** expiry date: **annual** adds one year, **monthly** adds one month (from that date, not from today).
+* If the membership has **already expired** (expiry date before today), `renew` is rejected; register the person again with `add`.
 * Membership type will be updated if included in the command.
 
 Examples:
