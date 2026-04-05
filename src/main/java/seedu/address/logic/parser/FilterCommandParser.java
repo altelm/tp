@@ -119,8 +119,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             if (argMultimap.getValue(PREFIX_AGE_EQUAL).isPresent()) {
                 int otherAge = parseAge(argMultimap.getValue(PREFIX_AGE_EQUAL).get());
                 if (otherAge != age) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            FilterCommand.MESSAGE_USAGE));
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
                 }
                 age -= 1; // Adjust age for greater than or equal to
             }
@@ -211,7 +211,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 String otherExpiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).get().trim();
                 verifyExpiryDate(otherExpiryDate);
                 if (!expiryDate.equals(otherExpiryDate)) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
                 }
                 predicates.add(new ExpiryDateBeforePredicate(ParserUtil.parseExpiryDate(expiryDate)
                                                                 .getExpiryDate().plusDays(1)));
