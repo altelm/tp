@@ -299,7 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user    | access a help command                                              | review the list of commands                          |
 | `* *`    | user    | view command history                                               | check past activity                                  |
 | `* *`    | user    | auto-save data                                                     | avoid losing changes if the app closes               |
-| `* *`    | user    | detect duplicate members                                           | avoid adding the same member                         |
+| `*`      | user    | renew memberships                                                  | extend their membership validity                     |
 | `*`      | user    | view number of memberships expiring soon                           | remind members to renew memberships                  |
 | `*`      | user    | track the number of recently added members                         | follow up on new member requests                     |
 | `*`      | user    | add remarks to a member                                            | record special requests                              |
@@ -417,6 +417,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitDesk shows an error message.
 
       Use case ends.
+
+**Use case: UC06 - View Details of a Specific Member**
+
+**Use case: UC07 - Add a Remark to a Member**
+
+**Use case: UC08 - Undo a Command**
+
+
+**Use case: UC09 - Access Command History**
+
+**Use case: UC10 - Renew a Member's Membership**
+
+**MSS**
+
+1.  Receptionist requests to list members
+2.  FitDesk shows a list of members
+3.  Receptionist requests to renew a specific member in the list
+4.  Receptionist can choose to modify the membership type field or not
+5.  FitDesk renews the membership of the member
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. FitDesk shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. Invalid membership type provided
+    * 3a1. FitDesk detects invalid input. 
+      3a2. FitDesk displays an error message and requests correct input.
+      3a3. Receptionist corrects the input.
+
+      Use case resumes at step 5.
 
 *{More to be added}*
 
