@@ -286,48 +286,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I can/want to …​                      | So that I can…​                                                   |
-|----------|---------------------------------------------|---------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | user                                        | view all members                      | browse the database                                               |
-| `* * *`  | user                                        | add a new member                      | register new members to the database                              |
-| `* * *`  | user                                        | delete a member                       | remove inactive records                                           |
-| `* * *`  | user                                        | view full details of a member         | manage members' accounts effectively                              |
-| `* * *`  | user                                        | find members by name                  | locate details without going through the entire list              |
-| `* *`    | user                                        | edit a member's details               | keep member records updated                                       |
-| `* *`    | user                                        | track membership validity and status  | get a quick overview of active and valid memberships              |
-| `* *`    | user                                        | view memberships expiring soon        | remind members to renew memberships                               |
-| `* *`    | user                                        | view recently added members           | follow up on new member requests                                  |
-| `* *`    | user                                        | filter members by age/joined time/expiry time/gender | view members in specific groups                                |
-| `* *`    | user                                        | access a help command                 | review the list of commands                                       |
-| `* *`    | user                                        | view command history                  | check past activity                                               |
-| `* *`    | user                                        | auto-save data                        | avoid losing changes if the app closes                            |
-| `* *`    | user                                        | sort members by membership type       | give membership perks appropriately                               |
-| `* *`    | user                                        | detect duplicate members              | avoid accidentally adding the same member                         |
-| `* *`    | user                                        | export/import member data             | view members in the address book across systems                   |
-| `* *`    | user                                        | find members by phone number          | locate members when other details are incorrect                   |
-| `* *`    | user                                        | quickly access a member's emergency contact | contact them in emergencies                                   |
-| `* *`    | user                                        | see clear and comprehensive error messages | correct mistakes efficiently                                   |
-| `* *`    | user                                        | perform actions using typed commands  | work efficiently                                                  |
-| `* *`    | user                                        | add notes to a member                 | record special requests                                           |
-| `* *`    | user                                        | view email addresses                  | send invoices and reminders                                       |
-| `* *`    | user                                        | search by partial name                | avoid needing exact spelling                                      |
-| `* *`    | user                                        | record membership start and end dates | see when a membership ends                                        |
-| `* *`    | user                                        | record phone numbers                  | contact members when needed                                       |
-| `* *`    | user                                        | record email addresses                | send emails to members                                            |
-| `* *`    | user                                        | record member ages                    | determine eligibility and emergency readiness                     |
-| `* *`    | user                                        | record member genders                 | keep relevant demographic info                                    |
-| `* *`    | user                                        | record member names                   | address members properly                                          |
-| `* *`    | user                                        | record emergency contact phone numbers | contact emergency contacts when needed                           |
-| `*`      | user                                        | filter members by membership status   | track active or inactive memberships                              |
-| `*`      | user                                        | schedule notifications on certain dates | send gifts on birthdays or anniversaries                        |
-| `*`      | user                                        | find members with incomplete payment  | contact them to send reminders                                    |
-| `*`      | user                                        | view members who cancelled/changed subscription | get feedback to improve the gym                          |
-| `*`      | user                                        | send mass messages to members         | notify them quickly about sudden events                           |
-| `*`      | user                                        | filter members who live close to the gym | implement targeted discounts                                    |
-| `*`      | user                                        | clear the address book                | delete all members at once                                        |
-| `*`      | user                                        | keep member notes up to date          | ensure notes stay relevant                                        |
-| `*`      | user                                        | pin a member                          | access members with urgent actions quickly                        |
-| `*`      | user                                        | count members after filtering         | know totals for specific filters                                  |
+| Priority | As a …​ | I can/want to …​                                                   | So that I can…​                                      |
+|----------|---------|--------------------------------------------------------------------|------------------------------------------------------|
+| `* * *`  | user    | view all members                                                   | browse the database                                  |
+| `* * *`  | user    | add a new member                                                   | register new members to the database                 |
+| `* * *`  | user    | delete a member                                                    | remove inactive records                              |
+| `* * *`  | user    | view full details of a member                                      | manage members' accounts effectively                 |
+| `* * *`  | user    | find members by name                                               | locate details without going through the entire list |
+| `* *`    | user    | edit a member's details                                            | keep member records updated                          |
+| `* *`    | user    | track membership validity and status                               | get a quick overview of active and valid memberships |
+| `* *`    | user    | filter members by specific fields (e.g. gender, age, status, etc.) | view members in specific groups                      |
+| `* *`    | user    | access a help command                                              | review the list of commands                          |
+| `* *`    | user    | view command history                                               | check past activity                                  |
+| `* *`    | user    | auto-save data                                                     | avoid losing changes if the app closes               |
+| `*`      | user    | renew memberships                                                  | extend their membership validity                     |
+| `*`      | user    | view number of memberships expiring soon                           | remind members to renew memberships                  |
+| `*`      | user    | track the number of recently added members                         | follow up on new member requests                     |
+| `*`      | user    | add remarks to a member                                            | record special requests                              |
+| `*`      | user    | clear the address book                                             | delete all members at once                           |
 
 ### Use cases
 
@@ -441,6 +417,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitDesk shows an error message.
 
       Use case ends.
+
+**Use case: UC06 - View Details of a Specific Member**
+
+**Use case: UC07 - Add a Remark to a Member**
+
+**Use case: UC08 - Undo a Command**
+
+
+**Use case: UC09 - Access Command History**
+
+**Use case: UC10 - Renew a Member's Membership**
+
+**MSS**
+
+1.  Receptionist requests to list members
+2.  FitDesk shows a list of members
+3.  Receptionist requests to renew a specific member in the list
+4.  Receptionist can choose to modify the membership type field or not
+5.  FitDesk renews the membership of the member
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. FitDesk shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. Invalid membership type provided
+    * 3a1. FitDesk detects invalid input. 
+      3a2. FitDesk displays an error message and requests correct input.
+      3a3. Receptionist corrects the input.
+
+      Use case resumes at step 5.
 
 *{More to be added}*
 
