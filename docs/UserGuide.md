@@ -175,6 +175,25 @@ Example:
 The phone number and email address of the 7th member are edited to be `91234567` and `johndoe@example.com` respectively
 
 
+### Deleting a member : `delete`
+
+Deletes the specified member from the list.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Example:
+* `list` followed by `delete 2`
+  1. `list`
+  ![list](images/screenshots/delete_1.png)
+  2. `delete 2`
+  ![deleted member](images/screenshots/delete_2.png)
+  The 2nd member is deleted from the list
+
+
 ### Locating members by keyword: `find`
 
 Finds members whose fields contain the search query as a substring.
@@ -206,23 +225,42 @@ Example:
 Members with valid memberships are listed
 
 
-### Deleting a member : `delete`
+### Viewing the details of a person : `details`
 
-Deletes the specified member from the list.
+Shows the details of the specified member from the list.
 
-Format: `delete INDEX`
+Format: `details INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Shows the details of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …
 
-Example:
-* `list` followed by `delete 2`
+Examples:
+* `list` followed by `details 1`
   1. `list`
-  ![list](images/screenshots/delete_1.png)
-  2. `delete 2` 
-  ![deleted member](images/screenshots/delete_2.png)
-  The 2nd member is deleted from the list
+  ![list](images/screenshots/details_1.png)
+  2. `details 1`
+  ![details in list](images/screenshots/details_2.png)
+  The 1st member's details are shown in the list
+* `find David` followed by `details 1`
+![details in find result](images/screenshots/details_3.png)
+The 1st member's details are shown in the `find` command result.
+
+
+### Adding a remark to a member : `remark`
+
+Adds or edits a remark for the specified member.
+
+Format: `remark INDEX r/[REMARK]`
+
+* Edits the remark of the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …
+* Existing remark will be overwritten by the input.
+* Providing an empty remark (i.e. `r/` with nothing after it) removes the remark from the member.
+
+Examples:
+* `remark 1 r/likes swimming`
+  ![remark added](images/screenshots/remark_1.png)
+  Remark `likes swimming` is added to the 1st member.
 
 
 ### Renewing a membership: `renew`
@@ -249,44 +287,6 @@ The 4th member's membership type is changed from `Annual` to `Monthly`, so the e
 * `renew 1`
 ![renew failed](images/screenshots/renew_5.png)
 The 1st member is failed to be renewed since its membership has expired
-
-
-### Adding a remark to a member : `remark`
-
-Adds or edits a remark for the specified member.
-
-Format: `remark INDEX r/[REMARK]`
-
-* Edits the remark of the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …
-* Existing remark will be overwritten by the input.
-* Providing an empty remark (i.e. `r/` with nothing after it) removes the remark from the member.
-
-Examples:
-* `remark 1 r/likes swimming`
-  ![remark added](images/screenshots/remark_1.png)
-  Remark `likes swimming` is added to the 1st member.
-
-
-### Viewing the details of a person : `details`
-
-Shows the details of the specified member from the list.
-
-Format: `details INDEX`
-
-* Shows the details of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …
-
-Examples:
-* `list` followed by `details 1`
-  1. `list`
-  ![list](images/screenshots/details_1.png)
-  2. `details 1`
-  ![details in list](images/screenshots/details_2.png)
-  The 1st member's details are shown in the list
-* `find David` followed by `details 1`
-![details in find result](images/screenshots/details_3.png)
-The 1st member's details are shown in the `find` command result.
 
 
 ### Clearing all entries : `clear`
