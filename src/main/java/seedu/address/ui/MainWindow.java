@@ -197,6 +197,9 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
 
+            personListPanel.getListView().getSelectionModel().clearSelection();
+            memberDetailsPlaceholder.getChildren().setAll(dashBoard.getRoot());
+
             if (commandResult.getPersonToSelect() != null) {
                 personListPanel.selectPerson(commandResult.getPersonToSelect());
             }
