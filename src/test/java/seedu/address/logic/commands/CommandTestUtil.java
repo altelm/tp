@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -46,6 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_EMERGENCY_CONTACT_BOB = "91235433";
     public static final String VALID_TYPE_AMY = "Annual";
     public static final String VALID_TYPE_BOB = "Monthly";
+    public static final String VALID_JOIN_DATE_AMY = "01-01-2024";
+    public static final String VALID_JOIN_DATE_BOB = "03-03-2024";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -65,6 +68,8 @@ public class CommandTestUtil {
             + VALID_EMERGENCY_CONTACT_BOB;
     public static final String TYPE_DESC_AMY = " " + PREFIX_MEMBERSHIP_TYPE + VALID_TYPE_AMY;
     public static final String TYPE_DESC_BOB = " " + PREFIX_MEMBERSHIP_TYPE + VALID_TYPE_BOB;
+    public static final String JOIN_DATE_DESC_AMY = " " + PREFIX_JOIN_DATE + VALID_JOIN_DATE_AMY;
+    public static final String JOIN_DATE_DESC_BOB = " " + PREFIX_JOIN_DATE + VALID_JOIN_DATE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -72,6 +77,7 @@ public class CommandTestUtil {
     public static final String INVALID_DATEOFBIRTH_DESC = " " + PREFIX_DATEOFBIRTH + "1999-01-01"; // wrong date format
     public static final String INVALID_MEMBERSTATUS_DESC = " " + PREFIX_MEMBERSTATUS + "on"; // only 'valid'/'invalid'
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_JOIN_DATE_DESC = " " + PREFIX_JOIN_DATE + "1999-01-01"; // wrong date format
     // empty string not allowed for emergency contact
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT;
     public static final String INVALID_TYPE_DESC = " " + PREFIX_MEMBERSHIP_TYPE + "senior"; // missing '@' symbol

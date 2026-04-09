@@ -13,9 +13,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATEOFBIRTH_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMERGENCY_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOIN_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.JOIN_DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.JOIN_DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -28,6 +31,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATEOFBIRTH_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOIN_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
@@ -35,6 +39,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOIN_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSHIP_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -85,10 +90,26 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_optionalJoinDatePresent_success() {
+        MemberId testId1 = new MemberId(1);
+        MembershipJoinDate joinDate = new MembershipJoinDate(VALID_JOIN_DATE_BOB);
+        MembershipExpiryDate expiryDate =
+                new MembershipExpiryDate(joinDate.getDate(), new MembershipType(VALID_TYPE_BOB));
+        Person expectedPerson = new Person(testId1, BOB.getName(), BOB.getPhone(), BOB.getGender(),
+                BOB.getDateOfBirth(), BOB.getEmail(), BOB.getEmergencyContact(), BOB.getMembershipType(),
+                joinDate, expiryDate, BOB.getRemark());
+
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TYPE_DESC_BOB + GENDER_DESC_BOB + DATEOFBIRTH_DESC_BOB
+                + EMERGENCY_CONTACT_DESC_BOB + JOIN_DATE_DESC_BOB, new AddCommand(expectedPerson));
+    }
+
+    @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GENDER_DESC_BOB + DATEOFBIRTH_DESC_BOB + TYPE_DESC_BOB
                 + EMERGENCY_CONTACT_DESC_BOB;
+        String validExpectedPersonStringWithJoinDate = validExpectedPersonString + JOIN_DATE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -106,6 +127,9 @@ public class AddCommandParserTest {
         // multiple membership type
         assertParseFailure(parser, TYPE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBERSHIP_TYPE));
+        // multiple join date
+        assertParseFailure(parser, JOIN_DATE_DESC_AMY + validExpectedPersonStringWithJoinDate,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
 
         // multiple emails
         assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
@@ -118,9 +142,10 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + EMERGENCY_CONTACT_DESC_AMY
-                         + GENDER_DESC_AMY + DATEOFBIRTH_DESC_AMY + TYPE_DESC_AMY + validExpectedPersonString,
+                        + GENDER_DESC_AMY + DATEOFBIRTH_DESC_AMY + TYPE_DESC_AMY + JOIN_DATE_DESC_AMY
+                        + validExpectedPersonStringWithJoinDate,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_EMERGENCY_CONTACT, PREFIX_EMAIL,
-                        PREFIX_PHONE, PREFIX_MEMBERSHIP_TYPE, PREFIX_GENDER, PREFIX_DATEOFBIRTH));
+                        PREFIX_PHONE, PREFIX_MEMBERSHIP_TYPE, PREFIX_GENDER, PREFIX_DATEOFBIRTH, PREFIX_JOIN_DATE));
 
         // invalid value followed by valid value
 
@@ -144,6 +169,9 @@ public class AddCommandParserTest {
         // invalid membership type
         assertParseFailure(parser, INVALID_TYPE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBERSHIP_TYPE));
+        // invalid join date
+        assertParseFailure(parser, INVALID_JOIN_DATE_DESC + validExpectedPersonStringWithJoinDate,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
 
         // invalid emergency contact
         assertParseFailure(parser, INVALID_EMERGENCY_CONTACT_DESC + validExpectedPersonString,
@@ -178,6 +206,9 @@ public class AddCommandParserTest {
         // invalid membership type
         assertParseFailure(parser, validExpectedPersonString + INVALID_TYPE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBERSHIP_TYPE));
+        // invalid join date
+        assertParseFailure(parser, validExpectedPersonStringWithJoinDate + INVALID_JOIN_DATE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOIN_DATE));
 
     }
 
@@ -244,6 +275,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + DATEOFBIRTH_DESC_BOB + INVALID_TYPE_DESC + EMAIL_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB,
                 MembershipType.MESSAGE_CONSTRAINTS);
+        // invalid join date
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + DATEOFBIRTH_DESC_BOB + TYPE_DESC_BOB + EMAIL_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
+                + INVALID_JOIN_DATE_DESC, MembershipJoinDate.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
