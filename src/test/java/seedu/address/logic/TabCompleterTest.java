@@ -52,10 +52,11 @@ public class TabCompleterTest {
     @Test
     public void getCompletions_addAfterName_suggestsAllPrefixes() {
         List<String> results = tabCompleter.getCompletions("add Alice ");
-        assertEquals(8, results.size());
+        assertEquals(9, results.size());
         assertTrue(results.contains("add Alice n/"));
         assertTrue(results.contains("add Alice p/"));
         assertTrue(results.contains("add Alice g/"));
+        assertTrue(results.contains("add Alice j/"));
     }
 
     @Test

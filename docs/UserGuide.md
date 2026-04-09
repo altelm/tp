@@ -139,7 +139,7 @@ Example:
 
 Adds a member to the member list.
 
-Format: `add n/NAME p/PHONE_NUMBER g/GENDER d/DATE_OF_BIRTH m/MEMBERSHIP_TYPE e/EMAIL ec/EMERGENCY_CONTACT`
+Format: `add n/NAME p/PHONE_NUMBER g/GENDER d/DATE_OF_BIRTH m/MEMBERSHIP_TYPE e/EMAIL ec/EMERGENCY_CONTACT [j/JOIN_DATE]`
 
 <box type="tip" seamless>
 
@@ -148,6 +148,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER d/DATE_OF_BIRTH m/MEMBERSHIP_TYPE e/
 
 * Each **phone number** and **email** must be unique in the member list (no two members may share the same phone or the same email).
 * **Names** do not need to be unique; different members are allowed to have the same name as long as their phone and email differ.
+* If `j/JOIN_DATE` is omitted, the member's join date defaults to the current date.
 * If you try to add someone whose phone or email matches an existing member, the command is rejected and the error message indicates which field is duplicated.
 
 Example:

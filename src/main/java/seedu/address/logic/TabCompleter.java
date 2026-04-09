@@ -70,7 +70,7 @@ public class TabCompleter {
         // add: only completes after at least one prefix+value is already present (handled separately).
         Map<String, List<String>> prefixMap = new HashMap<>();
         prefixMap.put(AddCommand.COMMAND_WORD,
-                Arrays.asList("n/", "p/", "g/", "d/", "e/", "m/", "ec/", "r/"));
+                Arrays.asList("n/", "p/", "g/", "d/", "e/", "m/", "ec/", "j/", "r/"));
         prefixMap.put(FilterCommand.COMMAND_WORD,
                 Arrays.asList("s/", "g/", "m/", "age>/", "age</", "age=/",
                         "j>/", "j</", "j=/", "exp>/", "exp</", "exp=/"));
