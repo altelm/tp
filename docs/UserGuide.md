@@ -67,6 +67,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
    > 
     >- Use the **Up** and **Down** arrow keys to cycle through previously entered commands.
     >- Press **Tab** in the command box to auto-complete command words, field prefixes, and values.
+    >- To navigate back to the overview from a member's details, click on the member in the list.
 ---
 **Try these example commands:**
 
