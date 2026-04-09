@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.getErrorMessageForConflictingPrefixes;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE_EQUAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE_GREATER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE_LESS;
@@ -18,6 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERSTATUS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FilterCommand;
@@ -63,6 +65,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEMBERSTATUS, PREFIX_GENDER, PREFIX_MEMBERSHIP_TYPE,
                 PREFIX_AGE_GREATER, PREFIX_AGE_LESS, PREFIX_AGE_EQUAL,
                 PREFIX_JOIN_DATE_AFTER, PREFIX_JOIN_DATE_BEFORE, PREFIX_JOIN_DATE_EQUALS,
+                PREFIX_EXPIRY_DATE_AFTER, PREFIX_EXPIRY_DATE_BEFORE, PREFIX_EXPIRY_DATE_EQUALS);
+
+        verifyNoConflictingPrefixes(argMultimap,
+                PREFIX_AGE_GREATER, PREFIX_AGE_LESS, PREFIX_AGE_EQUAL);
+        verifyNoConflictingPrefixes(argMultimap,
+                PREFIX_JOIN_DATE_AFTER, PREFIX_JOIN_DATE_BEFORE, PREFIX_JOIN_DATE_EQUALS);
+        verifyNoConflictingPrefixes(argMultimap,
                 PREFIX_EXPIRY_DATE_AFTER, PREFIX_EXPIRY_DATE_BEFORE, PREFIX_EXPIRY_DATE_EQUALS);
 
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -113,31 +122,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         // Filter based on age
         if (argMultimap.getValue(PREFIX_AGE_GREATER).isPresent()) {
-
             int age = parseAge(argMultimap.getValue(PREFIX_AGE_GREATER).get());
-
-            if (argMultimap.getValue(PREFIX_AGE_EQUAL).isPresent()) {
-                int otherAge = parseAge(argMultimap.getValue(PREFIX_AGE_EQUAL).get());
-                if (otherAge != age) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                age -= 1; // Adjust age for greater than or equal to
-            }
-
             predicates.add(new AgeGreaterThanPredicate(age));
         } else if (argMultimap.getValue(PREFIX_AGE_LESS).isPresent()) {
             int age = parseAge(argMultimap.getValue(PREFIX_AGE_LESS).get());
-
-            if (argMultimap.getValue(PREFIX_AGE_EQUAL).isPresent()) {
-                int otherAge = parseAge(argMultimap.getValue(PREFIX_AGE_EQUAL).get());
-                if (otherAge != age) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                age += 1; // Adjust age for less than or equal to
-            }
-
             predicates.add(new AgeLessThanPredicate(age));
         } else if (argMultimap.getValue(PREFIX_AGE_EQUAL).isPresent()) {
             int age = parseAge(argMultimap.getValue(PREFIX_AGE_EQUAL).get());
@@ -148,37 +136,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_JOIN_DATE_AFTER).isPresent()) {
             String joinDate = argMultimap.getValue(PREFIX_JOIN_DATE_AFTER).get().trim();
             verifyJoinDate(joinDate);
-
-            if (argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).isPresent()) {
-                String otherJoinDate = argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).get().trim();
-                verifyJoinDate(otherJoinDate);
-                if (!joinDate.equals(otherJoinDate)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                predicates.add(new JoinDateAfterPredicate(ParserUtil.parseJoinDate(joinDate)
-                        .getDate().minusDays(1)));
-            } else {
-                predicates.add(new JoinDateAfterPredicate(ParserUtil.parseJoinDate(joinDate).getDate()));
-            }
-
+            predicates.add(new JoinDateAfterPredicate(ParserUtil.parseJoinDate(joinDate).getDate()));
         } else if (argMultimap.getValue(PREFIX_JOIN_DATE_BEFORE).isPresent()) {
             String joinDate = argMultimap.getValue(PREFIX_JOIN_DATE_BEFORE).get().trim();
             verifyJoinDate(joinDate);
-
-            if (argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).isPresent()) {
-                String otherJoinDate = argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).get().trim();
-                verifyJoinDate(otherJoinDate);
-                if (!joinDate.equals(otherJoinDate)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                predicates.add(new JoinDateBeforePredicate(ParserUtil.parseJoinDate(joinDate)
-                        .getDate().plusDays(1)));
-            } else {
-                predicates.add(new JoinDateBeforePredicate(ParserUtil.parseJoinDate(joinDate).getDate()));
-            }
-
+            predicates.add(new JoinDateBeforePredicate(ParserUtil.parseJoinDate(joinDate).getDate()));
         } else if (argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).isPresent()) {
             String joinDate = argMultimap.getValue(PREFIX_JOIN_DATE_EQUALS).get().trim();
             verifyJoinDate(joinDate);
@@ -189,46 +151,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_EXPIRY_DATE_AFTER).isPresent()) {
             String expiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_AFTER).get().trim();
             verifyExpiryDate(expiryDate);
-
-            if (argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).isPresent()) {
-                String otherExpiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).get().trim();
-                verifyExpiryDate(otherExpiryDate);
-                if (!expiryDate.equals(otherExpiryDate)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                predicates.add(new ExpiryDateAfterPredicate(ParserUtil.parseExpiryDate(expiryDate)
-                                                                .getExpiryDate().minusDays(1)));
-            } else {
-                predicates.add(new ExpiryDateAfterPredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
-            }
-
+            predicates.add(new ExpiryDateAfterPredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
         } else if (argMultimap.getValue(PREFIX_EXPIRY_DATE_BEFORE).isPresent()) {
             String expiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_BEFORE).get().trim();
             verifyExpiryDate(expiryDate);
-
-            if (argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).isPresent()) {
-                String otherExpiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).get().trim();
-                verifyExpiryDate(otherExpiryDate);
-                if (!expiryDate.equals(otherExpiryDate)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-                }
-                predicates.add(new ExpiryDateBeforePredicate(ParserUtil.parseExpiryDate(expiryDate)
-                                                                .getExpiryDate().plusDays(1)));
-            } else {
-                predicates.add(new ExpiryDateBeforePredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
-            }
-
+            predicates.add(new ExpiryDateBeforePredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
         } else if (argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).isPresent()) {
             String expiryDate = argMultimap.getValue(PREFIX_EXPIRY_DATE_EQUALS).get().trim();
-            if (expiryDate.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-            }
-
-            if (!MembershipExpiryDate.isValidExpiryDate(expiryDate)) {
-                throw new ParseException(MembershipExpiryDate.MESSAGE_CONSTRAINTS);
-            }
+            verifyExpiryDate(expiryDate);
             predicates.add(new ExpiryDateEqualsPredicate(ParserUtil.parseExpiryDate(expiryDate).getExpiryDate()));
         }
 
@@ -242,6 +172,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         return new FilterCommand(combinedPredicate);
+    }
+
+    /**
+     * Throws a {@code ParseException} if more than one prefix from the given group is present.
+     */
+    private void verifyNoConflictingPrefixes(ArgumentMultimap argMultimap,
+            Prefix... group) throws ParseException {
+        Prefix[] present = Stream.of(group)
+                .filter(p -> argMultimap.getValue(p).isPresent())
+                .toArray(Prefix[]::new);
+        if (present.length > 1) {
+            throw new ParseException(getErrorMessageForConflictingPrefixes(group));
+        }
     }
 
     /**
