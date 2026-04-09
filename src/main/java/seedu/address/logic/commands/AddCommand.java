@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_DATEOFBIRTH + "DATEOFBIRTH "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT "
-            + PREFIX_MEMBERSHIP_TYPE + "MEMBERSHIP_TYPE "
+            + PREFIX_MEMBERSHIP_TYPE + "MEMBERSHIP_TYPE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
