@@ -43,6 +43,7 @@ public class UndoCommand extends Command {
 
         lastCommand.undo(model);
         commandHistory.pop();
+        commandHistory.pushRedo(lastCommand);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
