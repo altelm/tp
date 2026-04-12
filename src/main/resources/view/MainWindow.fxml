@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="FitDesk" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="800" minWidth="400" onCloseRequest="#handleExit" title="FitDesk" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/fitdesk.png" />
   </icons>
@@ -39,37 +39,39 @@
           </Menu>
         </MenuBar>
 
-        <HBox fx:id="headerBar" alignment="CENTER" prefHeight="49.0" spacing="10" styleClass="top-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <ImageView fx:id="headerImg" fitHeight="30" fitWidth="30" preserveRatio="true">
-            <image>
-              <Image url="@/images/fitdesk.png" />
-            </image>
-          </ImageView>
-          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" styleClass="top-bar-title" text="FitDesk" textAlignment="CENTER" />
-        </HBox>
+        <VBox spacing="5" VBox.vgrow="NEVER">
+          <HBox fx:id="headerBar" alignment="CENTER" prefHeight="49.0" spacing="10" styleClass="top-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="headerImg" fitHeight="30" fitWidth="30" preserveRatio="true">
+              <image>
+                <Image url="@/images/fitdesk.png" />
+              </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" styleClass="top-bar-title" text="FitDesk" textAlignment="CENTER" />
+          </HBox>
 
-        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+          <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="0" />
+            </padding>
+          </StackPane>
+        </VBox>
 
         <HBox VBox.vgrow="ALWAYS">
           <children>
-            <VBox fx:id="memberDetails" styleClass="pane-with-border" HBox.Hgrow="ALWAYS">
+            <VBox fx:id="memberDetails" styleClass="pane-with-border" HBox.Hgrow="ALWAYS" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="memberDetailsPlaceholder" HBox.hgrow="ALWAYS" />
+              <StackPane fx:id="memberDetailsPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
               <StackPane fx:id="dashboardPlaceholder" HBox.hgrow="ALWAYS" />
             </VBox>
-            <VBox fx:id="personList" styleClass="pane-with-border" HBox.hgrow="NEVER">
+            <VBox fx:id="personList" styleClass="pane-with-border" HBox.hgrow="NEVER" >
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
@@ -85,13 +87,11 @@
                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="185.0" styleClass="attribute-bar" text="Member ID" textAlignment="CENTER" GridPane.columnIndex="2" />
                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="170.0" styleClass="attribute-bar" text="Status" textAlignment="CENTER" GridPane.columnIndex="3" />
                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="160.0" styleClass="attribute-bar" text="Expires" textAlignment="CENTER" GridPane.columnIndex="4" />
-
               </GridPane>
-              <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+              <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
             </VBox>
           </children>
         </HBox>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

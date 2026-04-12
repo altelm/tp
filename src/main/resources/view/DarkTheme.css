@@ -90,7 +90,6 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: transparent;
 }
 
 .list-cell {
@@ -114,11 +113,6 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
-
-/*.list-cell:filled:selected #cardPane {
-    -fx-border-color: derive(#193cb8, 10%);
-    -fx-border-width: 1;
-}*/
 
 .list-cell .label {
     -fx-text-fill: black;
@@ -459,7 +453,7 @@
 .dash-number-label {
     -fx-font-family: "Metro";
     -fx-font-weight: bold;
-    -fx-font-size: 43px;
+    -fx-font-size: 40px;
     -fx-text-fill: white;
 }
 .dash-description-label {
