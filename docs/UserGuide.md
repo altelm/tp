@@ -484,3 +484,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Undo**   | `undo`
 **Help**   | `help`
+**Exit**   | `exit`
+
