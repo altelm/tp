@@ -370,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The given inputs are invalid.
-    * 3a1.FitDesk shows an error message.
+    * 3a1. FitDesk shows an error message.
 
       Use case resumes at step 2.
 
