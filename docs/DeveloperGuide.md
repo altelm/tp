@@ -588,9 +588,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 4a. Invalid membership type provided
-    * 3a1. FitDesk detects invalid input. 
-      3a2. FitDesk displays an error message and requests correct input.
-      3a3. Receptionist corrects the input.
+    * 4a1. FitDesk detects invalid input. 
+    * 4a2. FitDesk displays an error message and requests correct input.
+    * 4a3. Receptionist corrects the input.
 
       Use case resumes at step 5.
 
