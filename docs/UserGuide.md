@@ -173,7 +173,7 @@ Example:
     All members are listed
 
 
-### Editing a person : `edit`
+### Editing a member: `edit`
 
 Edits an existing member in the list.
 
