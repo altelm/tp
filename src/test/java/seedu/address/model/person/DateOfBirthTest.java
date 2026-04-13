@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 public class DateOfBirthTest {
@@ -29,6 +32,10 @@ public class DateOfBirthTest {
 
         assertTrue(DateOfBirth.isValidDateOfBirth("01-01-2000"));
         assertTrue(DateOfBirth.isValidDateOfBirth("31-12-1999"));
+
+        // future date -> invalid
+        String futureDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        assertFalse(DateOfBirth.isValidDateOfBirth(futureDate));
     }
 
     @Test
