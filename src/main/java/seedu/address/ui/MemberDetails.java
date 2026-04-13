@@ -62,7 +62,7 @@ public class MemberDetails extends UiPart<Region> {
     }
     private void setPerson(Person person) {
         memberId.setText("ID: " + person.getId().toString());
-        joinDate.setText("Start Date: " + person.getJoinDate().toString());
+        joinDate.setText("Date joined: " + person.getJoinDate().toString());
         expiryDate.setText("Expiry Date: " + person.getExpiryDate().toString());
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
@@ -80,8 +80,10 @@ public class MemberDetails extends UiPart<Region> {
         memberStatus.setText(person.getMemberStatus().memberStatus);
         if (person.getMemberStatus().memberStatus.equalsIgnoreCase("valid")) {
             memberStatus.getStyleClass().add("valid-tag");
-        } else {
+        } else if (person.getMemberStatus().memberStatus.equalsIgnoreCase("invalid")) {
             memberStatus.getStyleClass().add("invalid-tag");
+        } else {
+            memberStatus.getStyleClass().add("pending-tag");
         }
     }
 }

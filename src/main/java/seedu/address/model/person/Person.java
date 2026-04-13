@@ -61,7 +61,7 @@ public class Person {
         this.joinDate = joinDate;
         this.expiryDate = expiryDate;
         this.remark = remark;
-        this.memberStatus = new MemberStatus(this.expiryDate.getExpiryDate());
+        this.memberStatus = new MemberStatus(this.expiryDate.getExpiryDate(), this.joinDate.getDate());
     }
 
     public MemberId getId() {

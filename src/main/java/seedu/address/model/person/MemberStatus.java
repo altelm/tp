@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 
@@ -17,12 +17,16 @@ public class MemberStatus {
     /**
      * Constructs a {@code MemberStatus}.
      *
-     * @param date the expiry date of a membership.
+     * @param expiry the expiry date of a membership.
+     * @param join the expiry date of a membership.
      */
-    public MemberStatus(LocalDate date) {
-        requireNonNull(date);
-        if (date.isBefore(LocalDate.now())) {
+    public MemberStatus(LocalDate expiry, LocalDate join) {
+        requireAllNonNull(expiry, join);
+        LocalDate today = LocalDate.now();
+        if (!expiry.isAfter(today)) {
             this.memberStatus = "Invalid";
+        } else if (join.isAfter(today)) {
+            this.memberStatus = "Pending";
         } else {
             this.memberStatus = "Valid";
         }
