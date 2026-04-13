@@ -434,14 +434,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The given status is invalid.
-    * 2a1. FitDesk shows an error message.
-
-      Use case ends.
-
-
 **Use case: UC06 - View Details of a Specific Member**
 
 **MSS**
