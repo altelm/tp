@@ -412,6 +412,15 @@
     -fx-padding: 2 20 2 20;
     -fx-background-radius: 25;
 }
+
+#memberStatus.pending-status {
+    -fx-text-fill: #B06C00;
+    -fx-font-weight: bold;
+    -fx-background-color: derive(#FFAD29, 50%);
+    -fx-padding: 2 20 2 20;
+    -fx-background-radius: 25;
+}
+
 #memberStatus.valid-tag {
     -fx-text-fill: #20813a;
     -fx-font-weight: bold;
@@ -424,6 +433,14 @@
     -fx-text-fill: red;
     -fx-font-weight: bold;
     -fx-background-color: derive(#FF3C3C, 80%);
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 5;
+}
+
+#memberStatus.pending-tag {
+    -fx-text-fill: #B06C00;
+    -fx-font-weight: bold;
+    -fx-background-color: derive(#FFAD29, 50%);
     -fx-padding: 2 10 2 10;
     -fx-background-radius: 5;
 }

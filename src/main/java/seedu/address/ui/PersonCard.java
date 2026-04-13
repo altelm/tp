@@ -49,8 +49,10 @@ public class PersonCard extends UiPart<Region> {
         memberStatus.setText(person.getMemberStatus().memberStatus);
         if (person.getMemberStatus().memberStatus.equalsIgnoreCase("valid")) {
             memberStatus.getStyleClass().add("valid-status");
-        } else {
+        } else if (person.getMemberStatus().memberStatus.equalsIgnoreCase("invalid")) {
             memberStatus.getStyleClass().add("invalid-status");
+        } else {
+            memberStatus.getStyleClass().add("pending-status");
         }
 
     }
