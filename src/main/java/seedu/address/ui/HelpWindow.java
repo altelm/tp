@@ -71,14 +71,28 @@ public class HelpWindow extends UiPart<Stage> {
                 Desktop.getDesktop().browse(java.net.URI.create(USERGUIDE_URL));
             } else {
                 logger.info("Cannot open user guide in the browser. Desktop API is not supported.");
-                getRoot().show();
-                getRoot().centerOnScreen();
+                showHelpStage();
             }
         } catch (Exception e) {
             logger.info("Failed to open user guide in the browser. " + e.getMessage());
-            getRoot().show();
-            getRoot().centerOnScreen();
+            showHelpStage();
         }
+    }
+
+    /**
+     * Shows the fallback help stage and restores it if it was minimized.
+     */
+    private void showHelpStage() {
+        Stage helpStage = getRoot();
+        if (helpStage.isIconified()) {
+            helpStage.setIconified(false);
+        }
+        if (!helpStage.isShowing()) {
+            helpStage.show();
+            helpStage.centerOnScreen();
+        }
+        helpStage.toFront();
+        helpStage.requestFocus();
     }
 
     /**
