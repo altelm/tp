@@ -20,6 +20,7 @@ public class FilterCommand extends Command {
             + ": Filters members by a specified field.\n"
             + "Parameters: [s/STATUS] [g/GENDER] [m/MEMBERSHIP_TYPE] [age>/AGE] [age</AGE] [age=/AGE] "
             + "[j>/DATE] [j</DATE] [j=/DATE] [exp>/DATE] [exp</DATE] [exp=/DATE]\n"
+            + "AGE must be a whole number from 0 to 2147483647.\n"
             + "When filtering using the same field but with different operators, "
             + "you must use the same parameters.\n"
             + "Example: " + COMMAND_WORD + " s/valid age>/21 age=/21 exp</01-01-2024";

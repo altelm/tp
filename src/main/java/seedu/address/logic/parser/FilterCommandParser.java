@@ -333,7 +333,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     private int parseAge(String age) throws ParseException {
         String trimmedAge = age.trim();
-        if (trimmedAge.isEmpty() || !StringUtil.isNonZeroUnsignedInteger(trimmedAge)) {
+        if (trimmedAge.isEmpty() || !StringUtil.isUnsignedInteger(trimmedAge)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
         return Integer.parseInt(trimmedAge);

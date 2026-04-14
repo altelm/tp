@@ -40,6 +40,12 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_ageEqualsZero_success() {
+        FilterCommand expectedCommand = new FilterCommand(new AgeEqualsPredicate(0));
+        assertParseSuccess(parser, " age=/0", expectedCommand);
+    }
+
+    @Test
     public void parse_multipleFilters_success() {
         assertDoesNotThrow(() -> parser.parse(" age=/21 j>/01-01-2024 exp</01-01-2026"));
     }
@@ -225,9 +231,8 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_zeroAge_failure() {
-        assertParseFailure(parser, " age=/0",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    public void parse_zeroAge_success() {
+        assertDoesNotThrow(() -> parser.parse(" age=/0"));
     }
 
     @Test

@@ -247,6 +247,7 @@ Filters member list and displays members who have fields matching the given attr
 Format: `filter [s/STATUS] [g/GENDER] [m/MEMBERSHIP_TYPE] [age>/AGE] [age</AGE] [age=/AGE] [j>/DATE] [j</DATE] [j=/DATE] [exp>/DATE] [exp</DATE] [exp=/DATE]`
 
 * Each prefix may only be specified once. Specifying the same prefix more than once is an error.
+
 * For each date/age field, operators may be combined as follows:
   * `>/` + `</` — range, e.g. `age>/20 age</30` finds members aged strictly between 20 and 30
   * `>/` + `=/` (same value) — greater than or equal, e.g. `age>/20 age=/20` finds members aged 20 or older
@@ -503,7 +504,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [g/GENDER] [d/DATE_OF_BIRTH] [e/EMAIL] [ec/EMERGENCY_CONTACT] ​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORDS `<br> e.g., `find James Jake`
-**Filter**   | `filter [s/STATUS] [g/GENDER] [m/MEMBERSHIP_TYPE] [age>/AGE] [age</AGE] [age=/AGE] [j>/DATE] [j</DATE] [exp>/DATE] [exp</DATE] [exp=/DATE]`<br> e.g., `filter s/valid g/M`
+**Filter**   | `filter [s/STATUS] [g/GENDER] [m/MEMBERSHIP_TYPE] [age>/AGE] [age</AGE] [age=/AGE] [j>/DATE] [j</DATE] [exp>/DATE] [exp</DATE] [exp=/DATE]` (`AGE` must be `0` to `2147483647`)<br> e.g., `filter s/valid g/M`
 **Remark**  | `remark INDEX r/[REMARK]`<br> e.g., `remark 1 r/Likes to swim.`
 **Renew**   | `renew INDEX [m/MEMBERSHIP_TYPE] `<br> e.g., `renew 2 m/monthly`
 **Details**   | `details INDEX`<br> e.g., `details 1`
