@@ -135,14 +135,6 @@ The `Model` component,
 
 Membership status is modeled as derived data rather than persisted state. `Person#getMemberStatus()` computes a fresh `MemberStatus` from the member's join date, expiry date, and `LocalDate.now()` each time it is accessed. As a result, any command or UI path that rereads the member list or details view, such as `list`, `filter`, `details`, `add`, and `delete`, will reflect the current system date without requiring an application restart. The UI is not timer-driven, so statuses do not visibly change while the app is idle until some view refresh occurs.
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="700" />
-
-</box>
-
 
 ### Storage component
 
