@@ -32,17 +32,21 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullExpiry_usesDerivedFromJoinAndType() throws Exception {
+    public void toModelType_nullExpiry_throwsIllegalValueException() {
         JsonAdaptedPerson json = personWith("Annual", "11-03-2026", null);
-        Person model = json.toModelType();
-        assertEquals(expectedFirstPeriod("11-03-2026", "Annual"), model.getExpiryDate());
+        assertThrows(IllegalValueException.class,
+                String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
+                        MembershipExpiryDate.class.getSimpleName()),
+                json::toModelType);
     }
 
     @Test
-    public void toModelType_blankExpiry_usesDerivedFromJoinAndType() throws Exception {
+    public void toModelType_blankExpiry_throwsIllegalValueException() {
         JsonAdaptedPerson json = personWith("Monthly", "15-01-2026", "   ");
-        Person model = json.toModelType();
-        assertEquals(expectedFirstPeriod("15-01-2026", "Monthly"), model.getExpiryDate());
+        assertThrows(IllegalValueException.class,
+                String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT,
+                        MembershipExpiryDate.class.getSimpleName()),
+                json::toModelType);
     }
 
     @Test
